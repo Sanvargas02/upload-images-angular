@@ -1,8 +1,9 @@
 
 <!-- Un input para cargar imágenes -->
-<input type="file" (change)="uploadImage($event)">
+<input type="file" multiple accept="image/*" (change)="uploadImage($event)">
 
 <!-- Imprimir las imágenes -->
-<div class="images">
-  <img [src]="image" *ngFor="let image of images" width="200"> <!-- Aquí aplicamos el For-->
-</div>
+
+<!-- <div class="images">
+  <img [src]="image" *ngFor="let image of images" width="200">
+</div> -->
