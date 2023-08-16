@@ -2,9 +2,9 @@
 <!-- Un input para cargar imágenes -->
 <input type="file" multiple accept="image/*" (change)="uploadImage($event)">
 
-<!-- <button type="button" (click)="getImagies()">Presiona</button> -->
-<!-- Imprimir las imágenes -->
+<button type="button" (click)="eliminarImagen()">Presiona</button>
 
+<!-- Imprimir las imágenes -->
 <div class="images">
   <img [src]="image" *ngFor="let image of images" width="200">
 </div>

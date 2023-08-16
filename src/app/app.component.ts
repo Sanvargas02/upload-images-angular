@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Storage, ref, uploadBytes, listAll, getDownloadURL } from '@angular/fire/storage';
+import { deleteField } from '@angular/fire/firestore';
+import { Storage, ref, uploadBytes, listAll, getDownloadURL, deleteObject } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-root',
@@ -60,7 +61,8 @@ export class AppComponent implements OnInit {
         this.fullPaths.push(fullPath);
       }
       //Aquí mismo disparamos los eventos que tengan relación con nuestro arreglo fullPaths y depositamos el fullPaths como una de las propiedades del objeto Place
-      this.getImagies();
+      //this.getImagies(); //En caso de que quiera pintar las imágenes
+
     })
     .catch(error => {
       console.log(error);
@@ -92,6 +94,43 @@ export class AppComponent implements OnInit {
     })
 
   } // Fin método Get
+
+
+  //Método para eliminar los archivos del Storage
+  eliminarImagen() {
+    //if(!confirm('¿Estás seguro?')) return ;
+
+    //fullPaths debe ser remplazado por la propiedad del objeto (Plance) que almacene el arrelgo de paths
+    this.fullPaths.forEach(fullPath => {
+      // console.log(fullPath);
+
+      //Creamos una referencia a la o las imágenes que deseamos borrar
+      const pathReference = ref(this.storage, fullPath);
+
+      // Delete the file
+      deleteObject(pathReference).then(() => {
+        console.log('Se ha borrado ', fullPath);
+        //Aquí borramos el fullPath que está guardado en Firestore
+        /*
+        Usa el método deleteField():
+        import { doc, updateDoc, deleteField } from "firebase/firestore";
+
+        const cityRef = doc(db, 'cities', 'BJ');
+
+        // Remove the 'capital' field from the document
+        await updateDoc(cityRef, {
+            capital: deleteField()
+        });
+        */
+      }).catch((error) => {
+        console.log('Ha ocurrido un error');
+      });
+
+
+    })
+
+  }
+
 
 } //Fin Clase
 
