@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { deleteField } from '@angular/fire/firestore';
+// import { deleteField } from '@angular/fire/firestore';
 import { Storage, ref, uploadBytes, listAll, getDownloadURL, deleteObject } from '@angular/fire/storage';
 
 @Component({
@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
     //this.getImagies();
   }
 
+  //Método para cargar imágenes
   uploadImage($event: any) {
 
     //files es un arreglo de archivos que cargamos desde el html
